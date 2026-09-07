@@ -37,7 +37,7 @@ public class Asteroid : MonoBehaviour{
 
     void FixedUpdate()
     {
-        rb.MovePosition(rb.position + direction * baseSpeed * Time.fixedDeltaTime);
+        //rb.MovePosition(rb.position + direction * baseSpeed * Time.fixedDeltaTime);
     }
 
     void OnCollisionEnter2D(Collision2D collision){

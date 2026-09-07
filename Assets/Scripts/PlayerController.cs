@@ -14,8 +14,11 @@ public class PlayerController : MonoBehaviour{
     
     private Rigidbody2D playerRigidbody;
     private AudioSource audioSource;
+    private ParticleSystem wepondSystem;
     private ParticleSystem explosionParticles;
     private float elapsedTime = 0f;
+    private int firePressCount = 0;
+    private bool isFiring;
 
    
 
@@ -31,6 +34,7 @@ public class PlayerController : MonoBehaviour{
     }
 
     void Start(){
+        isFiring = false;
         //uiController = new UIController();
         //uiController.InitUI();
     }
@@ -39,6 +43,7 @@ public class PlayerController : MonoBehaviour{
     private void InitPlayer(){
         playerRigidbody = GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
+        wepondSystem = GetComponent<ParticleSystem>();
         //explosionParticles = GetComponent<ParticleSystem>();
         //exhustFlame.SetActive(false);
         //thrustSound.SetActive(false);
@@ -84,6 +89,20 @@ public class PlayerController : MonoBehaviour{
         //    playerRigidbody.linearVelocity = playerRigidbody.linearVelocity.normalized * maxSpeed;
         //}
     }
+
+    public void OnFire(InputValue value){
+        isFiring = value.isPressed;
+
+        if (isFiring){
+            firePressCount++;
+            Debug.Log($"[Player] Fire button pressed and held down ({firePressCount}).");
+            // particleSystem.ShootOneProjectile();
+        }
+        else{
+            Debug.Log($"[Player] Fire button released after being held down ({firePressCount}).");
+        }   
+        // Ignore release events.
+    }   
 
     void OnCollisionEnter2D(Collision2D collision){
         //Debug.Log($"[bounce] Player collided with an object tagged {collision.gameObject.tag}");        
