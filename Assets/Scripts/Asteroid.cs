@@ -20,6 +20,7 @@ public class Asteroid : MonoBehaviour{
     public AsteroidSize Size => size;
     public int Score => Asteroid.GetScore(size);
     public event Action<Asteroid> OnHit;
+    public event Action OnGameOver;
 
     private Rigidbody2D rb;
     private Vector2 direction;
@@ -37,7 +38,7 @@ public class Asteroid : MonoBehaviour{
 
     void FixedUpdate()
     {
-        //rb.MovePosition(rb.position + direction * baseSpeed * Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + direction * baseSpeed * Time.fixedDeltaTime);
     }
 
     void OnCollisionEnter2D(Collision2D collision){
@@ -51,9 +52,9 @@ public class Asteroid : MonoBehaviour{
             direction = Quaternion.Euler(0, 0, oscillation) * reflectedDirection;
         }
         else if(collision.gameObject.CompareTag(Tags.Ship))
-         //|| collision.gameObject.CompareTag(Tags.Asteroid)
-         {
-            Hit();
+        //|| collision.gameObject.CompareTag(Tags.Asteroid)
+        {
+            OnGameOver.Invoke();
         }
     }
 

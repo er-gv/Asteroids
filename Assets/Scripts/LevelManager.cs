@@ -38,6 +38,7 @@ public class LevelManager : MonoBehaviour{
         int count = 1;
         foreach(Asteroid asteroid in asteroids){
             asteroid.OnHit += HandleAsteroidHit;
+            asteroid.OnGameOver += HandleGameOver;
             Debug.Log($"[Level {count}:]  {asteroid.ToString()}\n");
             ++count;
         }
@@ -48,6 +49,7 @@ public class LevelManager : MonoBehaviour{
     {
         score += amount;
         OnScoreChanged?.Invoke(score);
+        Debug.Log($"[Score] Updated score: {score}");
     }
 
     // ----- Pause / Resume / Quit / Restart -----
@@ -90,7 +92,7 @@ public class LevelManager : MonoBehaviour{
         Debug.Log($"[Level] Hit called on asteroid:\n{asteroid.ToString()}.");
         //audioController.PlayAsteroidSplitFX();
         asteroid.OnHit -= HandleAsteroidHit;
-       
+        asteroid.OnGameOver -= HandleGameOver;
 
         //OnAsteroidHit?.Invoke(asteroid);
         UpdateScore(asteroid.Score);
@@ -102,16 +104,16 @@ public class LevelManager : MonoBehaviour{
                 Vector2 offset = UnityEngine.Random.insideUnitCircle * 0.5f;
                 Asteroid newAsteroid = asteroidsFactory.SpawnAsteroid(childSize, (Vector2)asteroid.transform.position + offset);
                 newAsteroid.OnHit += HandleAsteroidHit;
+                newAsteroid.OnGameOver += HandleGameOver;
                 asteroids.Add(newAsteroid);
             }
         }
         asteroids.Remove(asteroid);
         Destroy(asteroid.gameObject);
 
-        //if (asteroids.Count == 0)
-        //{
-        //    HandleLevelWon();
-        //}
+        if (asteroids.Count == 0){
+            HandleLevelWon();
+        }
     }
 
     
@@ -129,10 +131,11 @@ public class LevelManager : MonoBehaviour{
     private void HandleLevelWon()
     {
         ship.enabled = false; // disables ship movement/input handling
-        AudioController.Instance.PlayVictorySound();
-        playAgainCanvas.SetActive(true);
+        Debug.  Log($"[Level] Level won! Final score: {score}");
+        //AudioController.Instance.PlayVictorySound();
+        //playAgainCanvas.SetActive(true);
 
-        OnLevelWon?.Invoke();
+       // OnLevelWon?.Invoke();
     }
 
 

@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace Hobby.Erez.Asteroids2D
 {
-    public class Cannon : MonoBehaviour, IWeapon
+    public class FrontLazer : MonoBehaviour, IWeapon
     {
         
         [Header("Weapon Settings")]
@@ -18,12 +18,14 @@ namespace Hobby.Erez.Asteroids2D
         
 
         [SerializeField] ParticleSystem weaponSystem;
+
         //private float fireTimer = 0f;
         
         //private bool isFiring = false;
         
         private ParticleSystem.EmitParams emitParams;
         private bool IsRunning {get; set;}
+        private float fireCooldownTimer = 0f;
     
         public float FireInterval { get => fireInterval; set => fireInterval = value; }
         public float LaserSpeed { get => laserSpeed; set => laserSpeed = value; }
@@ -38,8 +40,8 @@ namespace Hobby.Erez.Asteroids2D
 
         private void Start()
         {
-            //isFiring = false;
-            //fireTimer = 0f;
+            IsRunning = false;
+            fireCooldownTimer = 0f;
             emitParams = new ParticleSystem.EmitParams
             {
                 startLifetime = laserLifetime,
@@ -58,35 +60,43 @@ namespace Hobby.Erez.Asteroids2D
            
         }
 
+        private void Update()
+        {
+            if (IsRunning && fireCooldownTimer <= 0f){
+                FireLaserBurst();
+                fireCooldownTimer = fireInterval;
+            }
+            else if (IsRunning && fireCooldownTimer > 0f){
+                fireCooldownTimer -= Time.deltaTime;
+            }
+        }
+
         public void StartFiring()
         {
             if(IsRunning) return;
-
             IsRunning = true;
-            StartCoroutine(FireLaserBurst());
+            fireCooldownTimer = 0f;
         }
 
         public void StopFiring()
         {
-            StopAllCoroutines();
             IsRunning = false;
-            
+            fireCooldownTimer = 0f;
         }
         
         
 
-        public IEnumerator FireLaserBurst(){
+        public void FireLaserBurst(){
         
-            while (true)
-            {
-                Vector3 spawnOrigin = transform.position + transform.up * noseOffset;
-                Vector3 fireDirection = transform.up;
+            
+            Vector3 spawnOrigin = transform.position + transform.up * noseOffset;
+            Vector3 fireDirection = transform.up;
                 //float angle = (i - (kLaserCount - 1) / 2.0f) * spreadAngle;
-                emitParams.position = spawnOrigin;
-                emitParams.velocity = fireDirection * laserSpeed;
-                weaponSystem.Emit(emitParams, 1);
-                yield return new WaitForSeconds( FireInterval );    
-            }
+            emitParams.position = spawnOrigin;
+            emitParams.velocity = fireDirection * laserSpeed;
+            weaponSystem.Emit(emitParams, 1);
+            //yAudioSource.Play();    
+        
         }
 
     }

@@ -86,29 +86,23 @@ namespace Hobby.Erez.Asteroids2D
             playerRigidbody.AddForce(direction * thrustForce);
         }
 
-        public void OnFire(InputValue value)
-        {
+        public void OnFire(InputValue value){
             
             if (value.isPressed && !isFiring){ 
                 isFiring = true;
-                foreach (GameObject weapon in weaponsArray)
-                {
+                foreach (GameObject weapon in weaponsArray){
                     var cannon = weapon.GetComponent<Cannon>();
-                    if (cannon != null)
-                    {
+                    if (cannon != null){
                         cannon.StartFiring();
                     }
                 }
             }
-            else if (!value.isPressed)
-            {
+            else if (!value.isPressed){
                 isFiring = false;
                 Debug.Log($"[Player] Fire button released after being held down ({firePressCount}).");
-                foreach (GameObject weapon in weaponsArray)
-                {
+                foreach (GameObject weapon in weaponsArray){
                     var cannon = weapon.GetComponent<Cannon>();
-                    if (cannon != null)
-                    {
+                    if (cannon != null){
                         cannon.StopFiring();
                     }
                 }
@@ -142,22 +136,28 @@ namespace Hobby.Erez.Asteroids2D
         {
             if (collision.gameObject.CompareTag(Tags.Asteroid))
             {
+                Debug.Log($"[Collision] Player collides with {collision.gameObject.name}");
+                HandleGameOver();
             }
 
             if (collision.gameObject.CompareTag(Tags.Border))
             {
+                Debug.Log($"[Collision] Player collides with {collision.gameObject.name}");
+                //AudioSource.PlayOneShot(softBangAudio);
             }
         }
 
         private void HandleGameOver()
         {
-            if (audioSource != null && explosionAudio != null)
+            /*if (audioSource != null && explosionAudio != null)
             {
                 audioSource.PlayOneShot(explosionAudio);
             }
             if (TryGetComponent<SpriteRenderer>(out var sr)) sr.enabled = false;
             if (TryGetComponent<Collider2D>(out var col)) col.enabled = false;
             Destroy(gameObject, explosionAudio != null ? explosionAudio.length : 0f);
+            */
+            Destroy(gameObject);
         }
     }
 }
