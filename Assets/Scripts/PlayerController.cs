@@ -13,13 +13,14 @@ namespace Hobby.Erez.Asteroids2D
 
         [Header("Laser Weapon Settings")]
         
-        [SerializeField] private float fireInterval = 1.0f;
-        [SerializeField] private float laserSpeed = 30f;
-        [SerializeField] private float laserLifetime = 2.5f;
-        [SerializeField] private Vector2 laserSize = new Vector2(0.15f, 1.2f);
+        [SerializeField] private GameObject[] weaponsArray;
+        //[SerializeField] private float fireInterval = 1.0f;
+        //[SerializeField] private float laserSpeed = 30f;
+        //[SerializeField] private float laserLifetime = 2.5f;
+        //[SerializeField] private Vector2 laserSize = new Vector2(0.15f, 1.2f);
         [ColorUsage(true, true)]
-        [SerializeField] private Color laserColor = new Color(0.5f, 2.0f, 2.5f, 1.0f);
-        [SerializeField] private float noseOffset = 0.5f;
+        //[SerializeField] private Color laserColor = new Color(0.5f, 2.0f, 2.5f, 1.0f);
+        //[SerializeField] private float noseOffset = 0.5f;
         
 
         private Rigidbody2D playerRigidbody;
@@ -30,12 +31,12 @@ namespace Hobby.Erez.Asteroids2D
         private bool isFiring = false;
 
     
-        public float FireInterval { get => fireInterval; set => fireInterval = value; }
+        /*public float FireInterval { get => fireInterval; set => fireInterval = value; }
         public float LaserSpeed { get => laserSpeed; set => laserSpeed = value; }
         public float LaserLifetime { get => laserLifetime; set => laserLifetime = value; }
         public Vector2 LaserSize { get => laserSize; set => laserSize = value; }
         public Color LaserColor { get => laserColor; set => laserColor = value; }
-
+*/
         private void Awake()
         {
             InitPlayer();
@@ -53,7 +54,7 @@ namespace Hobby.Erez.Asteroids2D
             audioSource = GetComponent<AudioSource>();
             weaponSystem = GetComponent<ParticleSystem>();
 
-            if (laserSize == Vector2.zero)
+            /*if (laserSize == Vector2.zero)
             {
                 laserSize = new Vector2(0.15f, 1.2f);
             }
@@ -64,22 +65,10 @@ namespace Hobby.Erez.Asteroids2D
             if (noseOffset <= 0.001f)
             {
                 noseOffset = 0.5f;
-            }
+            }*/
         }
 
-        private void Update()
-        {
-            if (isFiring)
-            {
-                fireTimer += Time.deltaTime;
-                if (fireTimer >= fireInterval)
-                {
-                    FireLaserBurst();
-                    fireTimer -= fireInterval;
-                }
-            }
-        }
-
+       
         private void FixedUpdate()
         {
             if (Mouse.current != null && Mouse.current.leftButton.isPressed)
@@ -99,25 +88,36 @@ namespace Hobby.Erez.Asteroids2D
 
         public void OnFire(InputValue value)
         {
-            isFiring = value.isPressed;
-
-            if (isFiring)
-            {
-                firePressCount++;
-                Debug.Log($"[Player] Fire button pressed and held down ({firePressCount}).");
-                fireTimer = 0f;
-                FireLaserBurst();
+            
+            if (value.isPressed && !isFiring){ 
+                isFiring = true;
+                foreach (GameObject weapon in weaponsArray)
+                {
+                    var cannon = weapon.GetComponent<Cannon>();
+                    if (cannon != null)
+                    {
+                        cannon.StartFiring();
+                    }
+                }
             }
-            else
+            else if (!value.isPressed)
             {
+                isFiring = false;
                 Debug.Log($"[Player] Fire button released after being held down ({firePressCount}).");
-                fireTimer = 0f;
+                foreach (GameObject weapon in weaponsArray)
+                {
+                    var cannon = weapon.GetComponent<Cannon>();
+                    if (cannon != null)
+                    {
+                        cannon.StopFiring();
+                    }
+                }
             }
         }
 
-        public void FireLaserBurst()
+        /*public void FireLaserBurst()
         {
-            if (weaponSystem == null) return;
+            if (weaponsArray == null) return;
 
             Vector3 spawnOrigin = transform.position + transform.up * noseOffset;
 
@@ -136,7 +136,7 @@ namespace Hobby.Erez.Asteroids2D
             };
 
             weaponSystem.Emit(emitParams, 1);
-        }
+        }*/
 
         private void OnCollisionEnter2D(Collision2D collision)
         {

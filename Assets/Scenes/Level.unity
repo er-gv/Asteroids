@@ -398,6 +398,57 @@ Transform:
   - {fileID: 47797807}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &558263892
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 558263893}
+  - component: {fileID: 558263894}
+  m_Layer: 0
+  m_Name: Left Cannon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &558263893
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 558263892}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.069, y: -0.008, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1110449219}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &558263894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 558263892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc77a44b345004e40b34bded0f28e128, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Hobby.Erez.Asteroids2D.Cannon
+  fireInterval: 1
+  laserSpeed: 30
+  laserLifetime: 2.5
+  laserSize: {x: 0.05, y: 0.005}
+  laserColor: {r: 0.5, g: 2, b: 2.5, a: 1}
+  noseOffset: 0
+  weaponSystem: {fileID: 1110449214}
 --- !u!1001 &603694057
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -922,6 +973,16 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3628331704113773749, guid: 1d790a06bc09f38418874d103e9632ea, type: 3}
   m_PrefabInstance: {fileID: 924341383}
   m_PrefabAsset: {fileID: 0}
+--- !u!198 &1110449214 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7936451405649541574, guid: 8fd9035f25f0039458403e10c388b1e8, type: 3}
+  m_PrefabInstance: {fileID: 5516019994104265833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1110449219 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7004888310998585742, guid: 8fd9035f25f0039458403e10c388b1e8, type: 3}
+  m_PrefabInstance: {fileID: 5516019994104265833}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1162241502
 GameObject:
   m_ObjectHideFlags: 0
@@ -1212,6 +1273,57 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5413199681401816606, guid: 46fd36c0039a3de4e8a017dd1652a1c9, type: 3}
   m_PrefabInstance: {fileID: 603694057}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1363023341
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1363023343}
+  - component: {fileID: 1363023342}
+  m_Layer: 0
+  m_Name: Right Cannon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1363023342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1363023341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc77a44b345004e40b34bded0f28e128, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Hobby.Erez.Asteroids2D.Cannon
+  fireInterval: 1
+  laserSpeed: 30
+  laserLifetime: 2.5
+  laserSize: {x: 0.05, y: 0.005}
+  laserColor: {r: 0.5, g: 2, b: 2.5, a: 1}
+  noseOffset: 0
+  weaponSystem: {fileID: 1110449214}
+--- !u!4 &1363023343
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1363023341}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.069, y: -0.008, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1110449219}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1400478346
 GameObject:
   m_ObjectHideFlags: 0
@@ -1645,7 +1757,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7936451405649541574, guid: 8fd9035f25f0039458403e10c388b1e8, type: 3}
       propertyPath: lengthInSec
-      value: 1
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 7936451405649541574, guid: 8fd9035f25f0039458403e10c388b1e8, type: 3}
       propertyPath: ShapeModule.type
@@ -1665,7 +1777,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7936451405649541574, guid: 8fd9035f25f0039458403e10c388b1e8, type: 3}
       propertyPath: ColorModule.enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7936451405649541574, guid: 8fd9035f25f0039458403e10c388b1e8, type: 3}
       propertyPath: NoiseModule.enabled
@@ -2001,7 +2113,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8791558076994481349, guid: 8fd9035f25f0039458403e10c388b1e8, type: 3}
       propertyPath: noseOffset
-      value: 0.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8791558076994481349, guid: 8fd9035f25f0039458403e10c388b1e8, type: 3}
       propertyPath: kLaserCount
@@ -2021,16 +2133,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8791558076994481349, guid: 8fd9035f25f0039458403e10c388b1e8, type: 3}
       propertyPath: laserColor.b
-      value: 1.144053
+      value: 1.5829788
       objectReference: {fileID: 0}
     - target: {fileID: 8791558076994481349, guid: 8fd9035f25f0039458403e10c388b1e8, type: 3}
       propertyPath: laserColor.g
-      value: 0.73025846
+      value: 1.0593015
       objectReference: {fileID: 0}
     - target: {fileID: 8791558076994481349, guid: 8fd9035f25f0039458403e10c388b1e8, type: 3}
       propertyPath: laserColor.r
-      value: 0.19067538
+      value: 0.27378538
       objectReference: {fileID: 0}
+    - target: {fileID: 8791558076994481349, guid: 8fd9035f25f0039458403e10c388b1e8, type: 3}
+      propertyPath: weaponsArray.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8791558076994481349, guid: 8fd9035f25f0039458403e10c388b1e8, type: 3}
+      propertyPath: 'weaponsArray.Array.data[0]'
+      value: 
+      objectReference: {fileID: 558263892}
+    - target: {fileID: 8791558076994481349, guid: 8fd9035f25f0039458403e10c388b1e8, type: 3}
+      propertyPath: 'weaponsArray.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1363023341}
     - target: {fileID: 8894453042737760262, guid: 8fd9035f25f0039458403e10c388b1e8, type: 3}
       propertyPath: m_AllowRoll
       value: 0
@@ -2057,7 +2181,13 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: c3507a36f3df67642aa833abc01e5875, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 7004888310998585742, guid: 8fd9035f25f0039458403e10c388b1e8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1363023343}
+    - targetCorrespondingSourceObject: {fileID: 7004888310998585742, guid: 8fd9035f25f0039458403e10c388b1e8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 558263893}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8fd9035f25f0039458403e10c388b1e8, type: 3}
 --- !u!1660057539 &9223372036854775807
