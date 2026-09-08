@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 1077224242799763236}
   - component: {fileID: 8889616691720102635}
   - component: {fileID: 4446355497206953385}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: AsterSmall1
-  m_TagString: Untagged
+  m_TagString: t_asteroid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

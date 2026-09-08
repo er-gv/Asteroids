@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 6202411691192687347}
   - component: {fileID: 1932445560440889242}
   - component: {fileID: 7252706108749956386}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: AsterMed2
-  m_TagString: Untagged
+  m_TagString: t_asteroid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

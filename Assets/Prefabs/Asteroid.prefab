@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 3993260552919404505}
   - component: {fileID: 1948674761633394901}
   - component: {fileID: 7326575189124094906}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Asteroid
-  m_TagString: t_obstacle
+  m_TagString: t_asteroid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -169,9 +169,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fa318b9558ada243b6bbe42f5905059, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Asteroid
-  m_minSize: 5
-  m_maxSize: 5
-  m_minSpeed: 5
-  m_maxSpeed: 5
-  m_spinSpeed: 5
-  m_thrustForce: 5
+  baseSpeed: 2
+  size: 0
+  oscillationDegrees: 5
