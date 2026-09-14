@@ -9,8 +9,7 @@ namespace Hobby.Erez.Asteroids2D
         [SerializeField] private float thrustForce = 50.0f;
         [SerializeField] private float maxSpeed = 0.200f;
         [SerializeField] private AudioClip thrustAudio;
-        [SerializeField] private AudioClip explosionAudio;
-
+        
         [Header("Laser Weapon Settings")]
         
         [SerializeField] private GameObject[] weaponsArray;
@@ -137,13 +136,13 @@ namespace Hobby.Erez.Asteroids2D
             if (collision.gameObject.CompareTag(Tags.Asteroid))
             {
                 Debug.Log($"[Collision] Player collides with {collision.gameObject.name}");
-                HandleGameOver();
+                //HandleGameOver();
             }
 
             if (collision.gameObject.CompareTag(Tags.Border))
             {
                 Debug.Log($"[Collision] Player collides with {collision.gameObject.name}");
-                //AudioSource.PlayOneShot(softBangAudio);
+                AudioController.Instance.PlayVictorySound();            
             }
         }
 

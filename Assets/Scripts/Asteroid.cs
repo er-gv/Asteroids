@@ -46,6 +46,7 @@ public class Asteroid : MonoBehaviour{
         if (collision.gameObject.CompareTag(Tags.Border)){
             //Asteroid will change direction due to screen border collision.
             //New direction is mirror of the original direction plus a random angle oscillation.
+            AudioController.Instance.PlayAsteroidBumpFX();
             Vector2 normal = collision.contacts[0].normal;
             Vector2 reflectedDirection = Vector2.Reflect(direction, normal).normalized;
             float oscillation = UnityEngine.Random.Range(-oscillationDegrees, oscillationDegrees);
@@ -54,7 +55,8 @@ public class Asteroid : MonoBehaviour{
         else if(collision.gameObject.CompareTag(Tags.Ship))
         //|| collision.gameObject.CompareTag(Tags.Asteroid)
         {
-            OnGameOver.Invoke();
+            AudioController.Instance.PlayAsteroidSplitFX();
+            //OnGameOver.Invoke();
         }
     }
 

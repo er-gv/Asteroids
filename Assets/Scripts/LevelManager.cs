@@ -9,10 +9,8 @@ public class LevelManager : MonoBehaviour{
     
     [SerializeField] AudioController audioController;
     [Header("Score")]
-    private int score;
-    public event Action<int> OnScoreChanged;
-
     
+
     [Header("Asteroids")]
     [SerializeField] AsteroidsFactory asteroidsFactory;
     [SerializeField] List<Asteroid> asteroids = new List<Asteroid>();
@@ -44,29 +42,24 @@ public class LevelManager : MonoBehaviour{
         }
     }
 
-    // ----- Score -----
-    public void UpdateScore(int amount)
-    {
-        score += amount;
-        OnScoreChanged?.Invoke(score);
-        Debug.Log($"[Score] Updated score: {score}");
-    }
-
+    
     // ----- Pause / Resume / Quit / Restart -----
     public void PauseGame()
     {
+        Debug.Log("[LevelManager] PauseGame called.");
         if (isPaused) return;
         isPaused = true;
         Time.timeScale = 0f;
-        AudioListener.pause = true;
+        AudioController.Instance.MuteMusic();
     }
 
     public void ResumeGame()
     {
+        Debug.Log("[LevelManager] ResumeGame called.");
         if (!isPaused) return;
         isPaused = false;
         Time.timeScale = 1f;
-        AudioListener.pause = false;
+        AudioController.Instance.UnmuteMusic();
     }
 
     public void QuitGame()
@@ -95,7 +88,7 @@ public class LevelManager : MonoBehaviour{
         asteroid.OnGameOver -= HandleGameOver;
 
         //OnAsteroidHit?.Invoke(asteroid);
-        UpdateScore(asteroid.Score);
+        ScoreManager.Instance.AddScore(asteroid.Score);
 
         if (asteroid.CanSplit){
             AsteroidSize childSize = asteroid.GetSmallerSize();
@@ -128,11 +121,9 @@ public class LevelManager : MonoBehaviour{
         OnGameOver?.Invoke();
     }
 
-    private void HandleLevelWon()
-    {
+    private void HandleLevelWon(){
         ship.enabled = false; // disables ship movement/input handling
-        Debug.  Log($"[Level] Level won! Final score: {score}");
-        //AudioController.Instance.PlayVictorySound();
+        AudioController.Instance.PlayVictorySound();
         //playAgainCanvas.SetActive(true);
 
        // OnLevelWon?.Invoke();
