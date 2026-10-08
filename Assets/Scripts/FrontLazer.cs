@@ -13,7 +13,7 @@ namespace Hobby.Erez.Asteroids2D
         [SerializeField] private float laserLifetime = 2.5f;
         [SerializeField] private Vector2 laserSize = new Vector2(0.15f, 0.0005f);
         [ColorUsage(true, true)]
-        [SerializeField] private Color laserColor = new Color(0.5f, 2.0f, 2.5f, 1.0f);
+        [SerializeField] private Color laserColor = new Color(2.5f, 2.5f, 0.05f, 1f);
         [SerializeField] private float noseOffset = 0f;
         
 

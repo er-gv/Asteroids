@@ -1,3 +1,5 @@
+#define MUSIC_ON
+
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -6,7 +8,7 @@ namespace Hobby.Erez.Asteroids2D{
 
 public class AudioController: MonoBehaviour{
     
-     public static AudioController Instance { get; private set; }
+    public static AudioController Instance { get; private set; }
     
     [Header("Audio")]
     [SerializeField] AudioClip backgroundMusic;
@@ -44,7 +46,9 @@ public class AudioController: MonoBehaviour{
         musicSource.loop = true;
         musicSource.playOnAwake = true;
         musicSource.volume = 0.5f;
+        #if MUSIC_ON
         musicSource.Play();
+        #endif
     }
 
     public void ToggleMusicPause(bool mute){

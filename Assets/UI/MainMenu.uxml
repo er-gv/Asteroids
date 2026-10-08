@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<engine:UXML
+    xmlns:engine="UnityEngine.UIElements"
+    xmlns:editor="UnityEditor.UIElements"
+    xsi="http://www.w3.org/2001/XMLSchema-instance"
+    engine="UnityEngine.UIElements"
+    editor="UnityEditor.UIElements"
+    noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd">
+    <Style src="Asteroids.uss" />
+    <engine:VisualElement name="root" class="root">
+    
+
+        <engine:Label name="title-label" text="ASTEROIDS" class="title" />
+
+        <engine:VisualElement name="menu-panel" class="menu-panel">
+
+            <engine:Label name="new-game-label" text="NEW GAME" class="menu-item menu-item-color" />
+            <engine:Label name="high-score-label" text="HIGH SCORE" class="menu-item menu-item-color" />
+            <engine:Label name="settings-label" text="SETTINGS" class="menu-item menu-item-color" />
+            <engine:Label name="quit-label" text="QUIT" class="menu-item menu-item-color" />
+
+        </engine:VisualElement>
+
+        <engine:Label name="footer-label" text="v1.0" class="footer" />
+
+    </engine:VisualElement>
+
+</engine:UXML>

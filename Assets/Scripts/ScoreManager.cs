@@ -1,6 +1,5 @@
 using UnityEngine;
-
-   
+using TMPro;
 namespace Hobby.Erez.Asteroids2D
 {
 /// <summary>
@@ -12,16 +11,16 @@ namespace Hobby.Erez.Asteroids2D
 /// (registry on Windows, plist on macOS/iOS, XML on Android/Linux).
 /// This is the standard "simple disk DB" for small game data like scores.
 /// </summary>
-public class ScoreManager : MonoBehaviour
-{
+public class ScoreManager : MonoBehaviour{
     private const string ScoreKey = "player_score";
 
     public static ScoreManager Instance { get; private set; }
 
     [SerializeField] private int score;
+    [SerializeField] TMP_Text scoreDisplay;
 
     /// <summary>Fired whenever the score changes, passing the new score.</summary>
-    public event System.Action<int> OnScoreChanged;
+    public event System.Action OnScoreChanged;
 
     private void Awake(){
         // Simple singleton so ScoreManager.Instance is reachable from anywhere.
@@ -32,45 +31,45 @@ public class ScoreManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
-
-        LoadScore();
+        OnScoreChanged += UpdateScoreDisplay;
+        ResetScore();
     }
 
     /// <summary>Current score value.</summary>
-    public int GetScore(){
-        return score;
-    }
+    public int Score => score;
+    
 
     /// <summary>Adds (or subtracts, if negative) to the score and persists it.</summary>
-    public void AddScore(int amount)
-    {
+    public void AddScore(int amount){
         score += amount;
         if (score < 0) score = 0;
-
-        OnScoreChanged?.Invoke(score);
+        OnScoreChanged?.Invoke();
         //SaveScore();
     }
 
     /// <summary>Resets score to zero and persists it.</summary>
-    public void ResetScore()
-    {
+    public void ResetScore(){
         score = 0;
-        OnScoreChanged?.Invoke(score);
+        OnScoreChanged?.Invoke();
         //SaveScore();
     }
 
     /// <summary>Writes the current score to disk.</summary>
-    public void SaveScore()
-    {
+    public void SaveScore(){
         PlayerPrefs.SetInt(ScoreKey, score);
         PlayerPrefs.Save(); // forces an immediate flush to disk
     }
 
     /// <summary>Loads the score from disk into memory.</summary>
-    public void LoadScore()
-    {
+    public void LoadScore(){
         score = PlayerPrefs.GetInt(ScoreKey, 0);
-        OnScoreChanged?.Invoke(score);
+        OnScoreChanged?.Invoke();
+    }
+
+    public void UpdateScoreDisplay(){
+        if (scoreDisplay != null){
+            scoreDisplay.text = $"Score: {score}";
+        }
     }
 }
 }

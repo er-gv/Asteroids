@@ -1,8 +1,0 @@
-<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/style.uss?fileID=7433441132597879392&amp;guid=b7f764e6a00984641a47bbe63808399f&amp;type=3#style"/>
-    <ui:Label text="Score"/>
-    <ui:Slider label="Volume" value="42" high-value="100" fill="true" style="height: 37px; align-self: center; width: 348px;"/>
-    <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
-        <ui:Toggle label="Mute Audio" style="height: 26px; width: 186px;"/>
-    </ui:VisualElement>
-</ui:UXML>

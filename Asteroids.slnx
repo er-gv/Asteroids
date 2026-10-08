@@ -1,3 +1,5 @@
 ﻿<Solution>
+  <Project Path="UnityEditorMCP.Tests.csproj" />
   <Project Path="Assembly-CSharp.csproj" />
+  <Project Path="UnityEditorMCP.Editor.csproj" />
 </Solution>

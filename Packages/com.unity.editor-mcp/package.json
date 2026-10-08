@@ -1,0 +1,31 @@
+{
+  "name": "com.unity.editor-mcp",
+  "displayName": "Unity Editor MCP",
+  "version": "0.16.0",
+  "unity": "2020.3",
+  "description": "Unity Editor integration with Model Context Protocol (MCP) for AI-assisted development",
+  "keywords": [
+    "mcp",
+    "ai",
+    "editor",
+    "automation",
+    "claude",
+    "cursor"
+  ],
+  "author": {
+    "name": "Ozan Kasikci",
+    "email": "ozan@kasikci.io",
+    "url": "https://github.com/ozankasikci"
+  },
+  "dependencies": {
+    "com.unity.nuget.newtonsoft-json": "3.2.1",
+    "com.unity.ugui": "2.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ozankasikci/unity-editor-mcp.git"
+  },
+  "license": "MIT",
+  "hideInEditor": false,
+  "_fingerprint": "91ca9654812b3146c71b7af3895cc4749175f291"
+}

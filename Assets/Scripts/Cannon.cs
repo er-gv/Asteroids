@@ -53,7 +53,7 @@ namespace Hobby.Erez.Asteroids2D
             
             if (laserColor.a <= 0.001f)
             {
-                laserColor = new Color(0.5f, 2.0f, 2.5f, 1.0f);
+                laserColor = new Color(0.8f, 2.0f, 0.5f, 0.750f);
             }
            
         }
