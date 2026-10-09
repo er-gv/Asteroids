@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.Rendering.Universal;
 
 namespace Hobby.Erez.Asteroids2D{
 
@@ -30,8 +31,11 @@ public class LevelManager : MonoBehaviour{
     [SerializeField] ScoreManager scoreManager;
     [Header("UI")]
     [SerializeField] private GameObject gameOverPane;
+    [SerializeField] private Light2D globalLight;
+    [SerializeField, Range(0f, 1f)] private float pauseLightMultiplier = 0.35f;
 
-    private bool isPaused;
+
+    private float normalLightIntensity;
     
 
     //public event Action<Asteroid> OnAsteroidHit;
@@ -41,6 +45,9 @@ public class LevelManager : MonoBehaviour{
     private void Awake() {
         Debug.Log($"[Level Awake] Level contains {asteroids.Count} asteroids:");
         gameOverPane.SetActive(false);
+        if (globalLight != null){
+            normalLightIntensity = globalLight.intensity;
+        }
         InitAsteroids();
         ship.OnPlayerHit += OnLevelFailed;
     }
@@ -56,26 +63,34 @@ public class LevelManager : MonoBehaviour{
 
 
         // ----- Pause / Resume / Quit / Restart -----
-        public void PauseGame()
-    {
+    public void TogglePauseState(bool pauseState){
+        if (pauseState){
+            PauseGame();
+        }
+        else{
+            ResumeGame();
+        }
+    }
+    public void PauseGame(){
         Debug.Log("[LevelManager] PauseGame called.");
-        if (isPaused) return;
-        isPaused = true;
+        if (globalLight != null){
+            globalLight.intensity = normalLightIntensity * pauseLightMultiplier;
+        }
         Time.timeScale = 0f;
         AudioController.Instance.MuteMusic();
+        
     }
 
-    public void ResumeGame()
-    {
+    public void ResumeGame(){
         Debug.Log("[LevelManager] ResumeGame called.");
-        if (!isPaused) return;
-        isPaused = false;
+        if (globalLight != null){
+            globalLight.intensity = normalLightIntensity;
+        }
         Time.timeScale = 1f;
         AudioController.Instance.UnmuteMusic();
     }
 
-    public void QuitGame()
-    {
+    public void QuitGame(){
         Time.timeScale = 1f; // don't leave the app in a paused state on exit
         // No score save call here — quitting intentionally discards progress.
         Application.Quit();
@@ -84,8 +99,7 @@ public class LevelManager : MonoBehaviour{
 #endif
     }
 
-    public void RestartGame()
-    {
+    public void RestartGame(){
         Time.timeScale = 1f;
         AudioListener.pause = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
