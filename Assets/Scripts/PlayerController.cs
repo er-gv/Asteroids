@@ -66,6 +66,7 @@ namespace Hobby.Erez.Asteroids2D{
         public void OnFire(InputValue value){
             
             bool isPressed = value.isPressed;
+            Debug.Log($"[Player] OnFire called. isPressed: {isPressed}, isFiring: {isFiring}");
             if (isPressed && !isFiring){ 
                 Debug.Log($"[Player] Fire button pressed.");
                 isFiring = true;

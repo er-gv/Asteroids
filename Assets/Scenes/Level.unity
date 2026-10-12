@@ -7416,7 +7416,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3620955068322552533, guid: 8fd9035f25f0039458403e10c388b1e8, type: 3}
       propertyPath: moveWithTransform
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3620955068322552533, guid: 8fd9035f25f0039458403e10c388b1e8, type: 3}
       propertyPath: ForceModule.enabled
@@ -7436,7 +7436,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3620955068322552533, guid: 8fd9035f25f0039458403e10c388b1e8, type: 3}
       propertyPath: ForceModule.inWorldSpace
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3620955068322552533, guid: 8fd9035f25f0039458403e10c388b1e8, type: 3}
       propertyPath: EmissionModule.m_BurstCount
