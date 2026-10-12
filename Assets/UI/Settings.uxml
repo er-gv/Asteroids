@@ -1,0 +1,30 @@
+<engine:UXML xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Asteroids.uss?fileID=7433441132597879392&amp;guid=618ea87d090c867448279e7d9e864073&amp;type=3#Asteroids"/>
+    <Style src="project://database/Assets/UI/Toggle/AstroToggle.uss?fileID=7433441132597879392&amp;guid=5d87d81c8ee56d44fa4d298cf8745149&amp;type=3#AstroToggle"/>
+    <engine:VisualElement name="root" class="root">
+        <engine:Label name="title-label" text="SETTINGS" class="title" style="height: 10px; justify-content: flex-start; flex-direction: row; align-self: center; align-content: center; align-items: auto; -unity-text-align: upper-center; width: 482px; -unity-background-scale-mode: stretch-to-fill; background-position-x: center; background-position-y: top 0;"/>
+        <engine:VisualElement name="menu-panel" class="menu-panel">
+            <engine:VisualElement class="settings-panel" style="justify-content: space-around; align-items: flex-end;">
+                <engine:Label text="Music" class="menu-item menu-item-color" style="height: 67px;"/>
+                <engine:VisualElement class="music-controls" style="align-items: stretch; justify-content: space-between; align-self: flex-end;">
+                    <engine:Slider name="music-slider" min-value="0" max-value="1" value="0.5" class="slider-item" style="width: 265px; align-items: stretch; justify-content: flex-end; align-self: center;"/>
+                    <engine:Toggle name="music-toggle" value="true" class="astro-toggle-button"/>
+                </engine:VisualElement>
+            </engine:VisualElement>
+            <engine:VisualElement class="settings-panel" style="justify-content: space-around; align-items: flex-end;">
+                <engine:Label text="Effects" class="menu-item menu-item-color"/>
+                <engine:VisualElement class="music-controls" style="align-items: center; justify-content: center;">
+                    <engine:Slider name="sfx-slider" min-value="0" max-value="1" value="0.5" class="slider-item" style="width: 265px; align-items: stretch; justify-content: flex-end; align-self: center;"/>
+                    <engine:Toggle name="sfx-toggle" value="false" class="astro-toggle-button"/>
+                </engine:VisualElement>
+            </engine:VisualElement>
+            <engine:VisualElement class="settings-panel">
+                <engine:Label text="Difficulty" class="menu-item menu-item-color"/>
+                <engine:VisualElement name="difficulty-group" class="difficulty-group">
+                    <engine:RadioButton text="Easy" group="difficulty-group" class="difficulty-option"/>
+                    <engine:RadioButton text="Hard" group="difficulty-group" class="difficulty-option"/>
+                </engine:VisualElement>
+            </engine:VisualElement>
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>

@@ -1,0 +1,8 @@
+<!--
+2026-09-22 AI-Tag
+This was created with the help of Assistant, a Unity Artificial Intelligence product.
+-->
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <ui:Style src="AstroToggle.uss" />
+    <ui:Toggle name="astroToggle" class="astro-toggle" />
+</ui:UXML>
