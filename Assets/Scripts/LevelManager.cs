@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
+using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 using TMPro;
 
@@ -30,8 +31,10 @@ public class LevelManager : MonoBehaviour{
     [SerializeField] ScoreManager scoreManager;
     [Header("UI")]
     [SerializeField] private GameObject gameOverPane;
+    [SerializeField] private GameObject pauseBtn;
+    [SerializeField] private UIDocument gamePanelUIDocument;
 
-    private bool isPaused;
+    
     
 
     //public event Action<Asteroid> OnAsteroidHit;
@@ -43,8 +46,31 @@ public class LevelManager : MonoBehaviour{
         gameOverPane.SetActive(false);
         InitAsteroids();
         ship.OnPlayerHit += OnLevelFailed;
+        InitUI();
     }
 
+    private void InitUI(){
+        
+        gamePanelUIDocument.rootVisualElement.Q<Button>("SettingsBtn").clicked += 
+        () => {
+            SceneManager.LoadSceneAsync("Settings", LoadSceneMode.Additive);    
+        };
+        gamePanelUIDocument.rootVisualElement.Q<Button>("ExitBtn").clicked += 
+        () => {
+            SceneManager.UnloadSceneAsync("Level");
+            SceneManager.LoadSceneAsync("MainMenu", LoadSceneMode.Single);
+        };
+        gamePanelUIDocument.rootVisualElement.Q<Toggle>("PausePlayToggle")
+        .RegisterValueChangedCallback(evt => {    
+            if (true == evt.newValue){
+                PauseGame();
+            }
+            else{
+                ResumeGame();
+            }
+        });
+    }
+    
     private void InitAsteroids() {
         foreach (Asteroid asteroid in asteroids) {
             asteroid.OnHit += HandleAsteroidHit;
@@ -56,20 +82,18 @@ public class LevelManager : MonoBehaviour{
 
 
         // ----- Pause / Resume / Quit / Restart -----
-        public void PauseGame()
-    {
+    
+    
+
+    public void PauseGame(){
         Debug.Log("[LevelManager] PauseGame called.");
-        if (isPaused) return;
-        isPaused = true;
         Time.timeScale = 0f;
         AudioController.Instance.MuteMusic();
+
     }
 
-    public void ResumeGame()
-    {
+    public void ResumeGame(){
         Debug.Log("[LevelManager] ResumeGame called.");
-        if (!isPaused) return;
-        isPaused = false;
         Time.timeScale = 1f;
         AudioController.Instance.UnmuteMusic();
     }
@@ -84,8 +108,7 @@ public class LevelManager : MonoBehaviour{
 #endif
     }
 
-    public void RestartGame()
-    {
+    public void RestartGame(){
         Time.timeScale = 1f;
         AudioListener.pause = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -96,6 +119,7 @@ public class LevelManager : MonoBehaviour{
         asteroids.Remove(a);
         Destroy(a.gameObject);
     }
+    
     private void HandleAsteroidHit(Asteroid asteroid){
         Debug.Log($"[Hit] Hit called on asteroid:\n{asteroid.ToString()}.");
         asteroid.OnHit -= HandleAsteroidHit;

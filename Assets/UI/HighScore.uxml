@@ -1,4 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="Asteroids.uss" />
     <Style src="project://database/Assets/UI/HighScore.uss?fileID=7433441132597879392&amp;guid=5a543f883a2c66e4fbb96a210cf87741&amp;type=3#HighScore"/>
     <ui:VisualElement name="high-score-screen" class="high-score-screen">
         <ui:VisualElement class="high-score-panel">

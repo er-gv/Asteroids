@@ -70,18 +70,6 @@
     -unity-text-align: middle-center;
 }
 
-.back-button {
-    width: 100%;
-    height: 42px;
-    margin-top: 28px;
-    background-color: rgb(82, 211, 190);
-    color: rgb(238, 163, 50);
-    font-size: 18px;
-    -unity-font-style: bold;
-    -unity-text-align: middle-center;
-}
-
-
 .menu-item {
     font-size: 28px;
     -unity-font-style: bold;

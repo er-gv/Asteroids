@@ -25,6 +25,11 @@
                     <engine:RadioButton text="Hard" group="difficulty-group" class="difficulty-option"/>
                 </engine:VisualElement>
             </engine:VisualElement>
+
+            <engine:VisualElement class="settings-panel">
+                <engine:Button name="back-button" text="Back" class="back-button"/>
+            </engine:VisualElement>
         </engine:VisualElement>
+        
     </engine:VisualElement>
 </engine:UXML>

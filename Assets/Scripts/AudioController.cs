@@ -51,7 +51,7 @@ public class AudioController: MonoBehaviour{
         #endif
     }
 
-    public void ToggleMusicPause(bool mute){
+    public void ToggleMusic(bool mute){
         Debug.Log($"[AudioController] ToggleMusicPause: {mute}");
         if(mute){musicSource.Pause();}
         else{musicSource.UnPause();}
@@ -59,12 +59,17 @@ public class AudioController: MonoBehaviour{
 
     public void MuteMusic() => musicSource.mute = true;
     public void UnmuteMusic() => musicSource.mute = false;
-    public void MuteFx() => sfxSource.mute = true;
-    public void UnmuteFx() => sfxSource.mute = false;
+    public void MuteSFX() => sfxSource.mute = true;
+    public void UnmuteSFX() => sfxSource.mute = false;
     public void SetMusicVolume(float volume) { 
         Debug.Log($"[AudioController] SetMusicVolume: {volume}");
         musicSource.volume = Mathf.Clamp01(volume);
     }
+    public void SetSFXVolume(float volume) { 
+        Debug.Log($"[AudioController] SetSFXVolume: {volume}");
+        sfxSource.volume = Mathf.Clamp01(volume);
+    }
+    
     public void PlayAsteroidSplitFX() => sfxSource.PlayOneShot(asteroidSplitFX);
     public void PlayAsteroidBumpFX() => sfxSource.PlayOneShot(asteroidBumpFX);
     public void PlayShipCrushFX() => sfxSource.PlayOneShot(shipCrushFX);

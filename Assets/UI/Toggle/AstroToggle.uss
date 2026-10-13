@@ -41,7 +41,7 @@ This was created with the help of Assistant, a Unity Artificial Intelligence pro
     background-color: transparent;
     border-width: 0;
     -unity-background-scale-mode: scale-to-fit;
-    background-image: url("project://database/Assets/UI/Pause5.png");
+    background-image: url("project://database/Assets/UI/Sprites/Pause5.png");
 }
 
 /* Default / Music checked state background image */
@@ -51,27 +51,27 @@ This was created with the help of Assistant, a Unity Artificial Intelligence pro
 .astro-toggle-button .unity-toggle__input:checked,
 #music-toggle:checked .unity-toggle__input,
 #music-toggle .unity-toggle__input:checked {
-    background-image: url("project://database/Assets/UI/Play5.png");
+    background-image: url("project://database/Assets/UI/Sprites/Play5.png");
 }
 
 /* Music toggle unchecked */
 #music-toggle .unity-toggle__input {
-    background-image: url("project://database/Assets/UI/MuteMusic3.png");
+    background-image: url("project://database/Assets/UI/Sprites/MuteMusic3.png");
 }
 
 /* music  toggle checked */
 #music-toggle:checked .unity-toggle__input,
 #music-toggle .unity-toggle__input:checked {
-    background-image: url("project://database/Assets/UI/EnableMusic3.png");
+    background-image: url("project://database/Assets/UI/Sprites/EnableMusic3.png");
 }
 
 /* SFX / Effects toggle unchecked */
 #sfx-toggle .unity-toggle__input {
-    background-image: url("project://database/Assets/UI/MuteEffects3.png");
+    background-image: url("project://database/Assets/UI/Sprites/MuteEffects3.png");
 }
 
 /* SFX / Effects toggle checked */
 #sfx-toggle:checked .unity-toggle__input,
 #sfx-toggle .unity-toggle__input:checked {
-    background-image: url("project://database/Assets/UI/EnableEffects3.png");
+    background-image: url("project://database/Assets/UI/Sprites/EnableEffects3.png");
 }

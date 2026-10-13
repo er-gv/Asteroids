@@ -21,8 +21,9 @@ public class MenuController : MonoBehaviour{
 
     private void OnEnable(){
         uiDocument = GetComponent<UIDocument>();
+        Debug.Log($"[MenuController] OnEnable: uiDocument={uiDocument}");
         var root = uiDocument.rootVisualElement;
-
+        Debug.Log($"[MenuController] OnEnable: root={root}");
         var newGameLabel = root.Q<Label>("new-game-label");
         var highScoreLabel = root.Q<Label>("high-score-label");
         var settingsLabel = root.Q<Label>("settings-label");
@@ -34,8 +35,7 @@ public class MenuController : MonoBehaviour{
         quitLabel.RegisterCallback<ClickEvent>(OnQuitClicked);
     }
 
-    private void OnDisable()
-    {
+    private void OnDisable(){
         var root = uiDocument.rootVisualElement;
         root.Q<Label>("new-game-label")?.UnregisterCallback<ClickEvent>(OnNewGameClicked);
         root.Q<Label>("high-score-label")?.UnregisterCallback<ClickEvent>(OnHighScoreClicked);
@@ -43,23 +43,19 @@ public class MenuController : MonoBehaviour{
         root.Q<Label>("quit-label")?.UnregisterCallback<ClickEvent>(OnQuitClicked);
     }
 
-    private void OnNewGameClicked(ClickEvent evt)
-    {
+    private void OnNewGameClicked(ClickEvent evt){
         SceneManager.LoadScene(gameSceneName);
     }
 
-    private void OnHighScoreClicked(ClickEvent evt)
-    {
+    private void OnHighScoreClicked(ClickEvent evt){
         SceneManager.LoadScene(highScoreSceneName);
     }
 
-    private void OnSettingsClicked(ClickEvent evt)
-    {
+    private void OnSettingsClicked(ClickEvent evt){
         SceneManager.LoadScene(settingsSceneName);
     }
 
-    private void OnQuitClicked(ClickEvent evt)
-    {
+    private void OnQuitClicked(ClickEvent evt){
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else
