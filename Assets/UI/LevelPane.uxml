@@ -1,12 +1,28 @@
 <engine:UXML xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <engine:Template name="AstroToggle" src="project://database/Assets/UI/Toggle/AstroToggle.uxml?fileID=9197481963319205126&amp;guid=3e472a3dbf426ba43be3450fa62e1c0c&amp;type=3#AstroToggle"/>
+    <engine:Template name="Settings" src="project://database/Assets/UI/Settings.uxml?fileID=9197481963319205126&amp;guid=38ab64ebc6b53d74a9d1f4206f406c58&amp;type=3#Settings"/>
     <Style src="project://database/Assets/UI/Toggle/AstroToggle.uss?fileID=7433441132597879392&amp;guid=5d87d81c8ee56d44fa4d298cf8745149&amp;type=3#AstroToggle"/>
-    <engine:Style src="LevelPane.uss" />
-    
-    <engine:VisualElement name="panel" class="panel">
-        <engine:Toggle name="PausePlayToggle" class="control-button"/>
-        <engine:Button name="ExitBtn" text="" class="control-button"/>
-        <engine:Button name="SettingsBtn" text="" class="control-button"/>
-        
+    <Style src="project://database/Assets/UI/LevelPane.uss?fileID=7433441132597879392&amp;guid=b242a7ab9e7d3d64f87f42c041d21ed3&amp;type=3#LevelPane"/>
+    <Style src="project://database/Assets/UI/Asteroids.uss?fileID=7433441132597879392&amp;guid=618ea87d090c867448279e7d9e864073&amp;type=3#Asteroids"/>
+    <engine:VisualElement name="level-root" class="root" style="align-content: center; align-self: center; justify-content: center; align-items: center; aspect-ratio: 1.777778; flex-basis: 100%; flex-direction: column;">
+        <engine:VisualElement name="score-panel" class="panel" style="padding-left: 10px; padding-right: 0; padding-top: 5px; padding-bottom: 5px; margin-top: 5px; margin-bottom: 5px; margin-right: 10px; -unity-text-align: middle-left; -unity-text-outline-color: rgba(0, 245, 0, 0); -unity-material: url(&quot;&quot;); -unity-background-image-tint-color: rgb(0, 0, 0); background-color: rgba(0, 0, 0, 0); color: rgba(255, 255, 255, 0); -unity-font-style: bold; justify-content: flex-start; align-self: center; align-items: flex-start; position: absolute; height: 85px; width: 262px;">
+            <engine:Label name="score-label" text="Score: " class="score-label" style="color: rgb(255, 99, 71); font-size: 200px; position: absolute; top: -2320px; left: -3473px;"/>
+        </engine:VisualElement>
+        <engine:VisualElement name="endgame-panel" hidden="true" class="panel" style="background-image: url(&quot;project://database/Assets/Imported/DeepSpaceSkyboxPack/GalacticGreen/Textures/galacticgreen-front.tif?fileID=2800000&amp;guid=fd076a6dda0fdb942b4954a21b68d4df&amp;type=3#galacticgreen-front&quot;); -unity-background-scale-mode: stretch-to-fill; background-size: 100% 100%; -unity-text-align: middle-center; flex-direction: column; min-width: auto; min-height: auto; max-width: initial; max-height: initial; aspect-ratio: 1.777778; display: flex; overflow: visible; visibility: visible; align-self: center; align-content: center; justify-content: space-between; height: auto; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; align-items: center; width: auto; background-color: rgba(0, 0, 0, 0); position: relative; margin-top: 0; top: 100px;">
+            <engine:VisualElement name="endgame-captions" style="flex-grow: 1; width: auto; justify-content: center;">
+                <engine:Label name="endgame-message" text="Game Over" class="endgame-message" style="flex-direction: row; -unity-font-style: bold; color: rgb(124, 252, 0); font-size: 40px; -unity-text-outline-color: rgb(0, 100, 0); text-shadow: 10px 10px 0 rgb(34, 139, 34); padding-top: 10px; padding-bottom: 10px; margin-top: 50px; margin-right: auto;"/>
+                <engine:Label name="endgame-score" text="Final Score: " class="endgame-score" style="color: rgb(255, 235, 4); font-size: 25px; -unity-text-outline-color: rgb(255, 140, 0); text-shadow: 20px 20px 10px rgb(255, 0, 0); -unity-text-outline-width: 0; align-items: center; align-self: center; align-content: center; justify-content: center; padding-top: 10px; margin-bottom: 5px; padding-bottom: 0; margin-top: 20px; -unity-text-align: middle-center;"/>
+            </engine:VisualElement>
+            <engine:VisualElement name="endgame-buttons" style="flex-grow: 1; flex-direction: row; margin-right: auto; margin-left: auto; padding-top: 20px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px; background-size: 0% 0%; transition-property: all, ignored; transition-duration: 0s, 0s; transition-timing-function: ease, ease; transition-delay: 0s, 0s; max-width: 100%; max-height: 100%; width: auto; align-items: center; justify-content: center; align-content: center; align-self: center; display: flex; margin-top: 40px;">
+                <engine:Image source="project://database/Assets/Imported/Gelzo/Fun%20Hyper%20Casual%20UI%20Pack%20-%20FREE/Sprites/Buttons/Restart3.png?fileID=2800000&amp;guid=b201d31c042c7734bb0f89ae54dae608&amp;type=3#Restart3" name="replay" tooltip="replay level" style="flex-direction: row; width: 30%; height: 30%; text-shadow: 0 0 0 rgb(0, 195, 0); -unity-text-outline-color: rgb(0, 201, 0); -unity-text-outline-width: 20px;"/>
+                <engine:Image source="project://database/Assets/Imported/Gelzo/Fun%20Hyper%20Casual%20UI%20Pack%20-%20FREE/Sprites/Buttons/Exit3.png?fileID=2800000&amp;guid=7d686a75bdd7f5d438d3e1d09cddc493&amp;type=3#Exit3" name="exit" tooltip="back to main menu" style="flex-direction: row; width: 30%; height: 30%;"/>
+            </engine:VisualElement>
+        </engine:VisualElement>
+        <engine:VisualElement name="control-panel" class="panel" style="align-self: center; align-content: center; height: 120px; margin-right: auto; margin-left: auto; margin-top: 10px; margin-bottom: 10px; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px;">
+            <engine:Instance template="AstroToggle" picking-mode="Position" style="align-self: center; align-content: center; justify-content: center; align-items: center; width: 50%; height: 50%;"/>
+            <engine:Button name="ExitBtn" text="" class="control-button" style="align-self: center; align-content: center; align-items: center; justify-content: center; width: auto; height: auto;"/>
+            <engine:Button name="SettingsBtn" text="" class="control-button" style="align-content: center; align-self: center; align-items: center; justify-content: center; height: auto; width: auto;"/>
+        </engine:VisualElement>
     </engine:VisualElement>
-
+    <engine:Instance template="Settings"/>
 </engine:UXML>

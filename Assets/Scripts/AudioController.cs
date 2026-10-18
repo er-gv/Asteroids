@@ -38,19 +38,27 @@ public class AudioController: MonoBehaviour{
         sfxSource = gameObject.AddComponent<AudioSource>();
         sfxSource.playOnAwake = false;
         sfxSource.loop = false;
-        sfxSource.volume = 1f;
+        sfxSource.mute = false;
+        sfxSource.volume = 0.5f;
     }
     private void InitMusic(){
         musicSource = gameObject.AddComponent<AudioSource>();
         musicSource.clip = backgroundMusic;
         musicSource.loop = true;
         musicSource.playOnAwake = true;
+        musicSource.mute = false;
         musicSource.volume = 0.5f;
+
         #if MUSIC_ON
         musicSource.Play();
         #endif
     }
 
+    public float MusicVolume{ get => musicSource.volume; }
+    public float SFXVolume{ get => sfxSource.volume; }
+
+    public bool IsMusicMuted{ get => musicSource.mute; }
+    public bool IsSFXMuted{ get => sfxSource.mute; }
     public void ToggleMusic(bool mute){
         Debug.Log($"[AudioController] ToggleMusicPause: {mute}");
         if(mute){musicSource.Pause();}
@@ -61,6 +69,13 @@ public class AudioController: MonoBehaviour{
     public void UnmuteMusic() => musicSource.mute = false;
     public void MuteSFX() => sfxSource.mute = true;
     public void UnmuteSFX() => sfxSource.mute = false;
+    
+    public void SetMusicClip(AudioClip clip){
+        musicSource.clip = clip;
+        if(!IsMusicMuted){
+            musicSource.Play();
+        }
+    }
     public void SetMusicVolume(float volume) { 
         Debug.Log($"[AudioController] SetMusicVolume: {volume}");
         musicSource.volume = Mathf.Clamp01(volume);
@@ -69,7 +84,7 @@ public class AudioController: MonoBehaviour{
         Debug.Log($"[AudioController] SetSFXVolume: {volume}");
         sfxSource.volume = Mathf.Clamp01(volume);
     }
-    
+
     public void PlayAsteroidSplitFX() => sfxSource.PlayOneShot(asteroidSplitFX);
     public void PlayAsteroidBumpFX() => sfxSource.PlayOneShot(asteroidBumpFX);
     public void PlayShipCrushFX() => sfxSource.PlayOneShot(shipCrushFX);

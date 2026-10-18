@@ -128,8 +128,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1307056821}
-  - component: {fileID: 1307056820}
   - component: {fileID: 1307056822}
+  - component: {fileID: 1307056823}
   m_Layer: 0
   m_Name: Settings
   m_TagString: Untagged
@@ -137,21 +137,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1307056820
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1307056819}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21ffb706e94bcee44a21bb1f855ee67b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  gameSceneName: Level
-  settingsSceneName: Settings
-  highScoreSceneName: HighScore
 --- !u!4 &1307056821
 Transform:
   m_ObjectHideFlags: 0
@@ -190,6 +175,18 @@ MonoBehaviour:
   m_PivotReferenceSize: 0
   m_Pivot: 0
   m_WorldSpaceCollider: {fileID: 0}
+--- !u!114 &1307056823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1307056819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d651c45d536cf0d48bfa9a68e1d4d89d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Hobby.Erez.Asteroids2D.GameSettingsController
 --- !u!1 &1901203505
 GameObject:
   m_ObjectHideFlags: 0

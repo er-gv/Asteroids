@@ -119,55 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &1056940817
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1056940819}
-  - component: {fileID: 1056940818}
-  m_Layer: 0
-  m_Name: Audio
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1056940818
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1056940817}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f58b437eba075247bc1b8a721891343, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Hobby.Erez.Asteroids2D.AudioController
-  backgroundMusic: {fileID: 8300000, guid: a80dd38418a93f340ba66514f493a0f4, type: 3}
-  victorySound: {fileID: 8300000, guid: 0dddefacebaa83a4187c780b656108b4, type: 3}
-  asteroidSplitFX: {fileID: 8300000, guid: e4dcc20c1da1ad64ebab06a9c9c4cc30, type: 3}
-  asteroidBumpFX: {fileID: 8300000, guid: 21d73725c2ba0804f97ad566a46cbd13, type: 3}
-  shipCrushFX: {fileID: 8300000, guid: ff3b2d467434c2440ad012b03f864bcc, type: 3}
---- !u!4 &1056940819
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1056940817}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1307056819
 GameObject:
   m_ObjectHideFlags: 0
@@ -239,6 +190,55 @@ MonoBehaviour:
   m_PivotReferenceSize: 0
   m_Pivot: 0
   m_WorldSpaceCollider: {fileID: 0}
+--- !u!1 &1313204552
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1313204554}
+  - component: {fileID: 1313204553}
+  m_Layer: 0
+  m_Name: Audio
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1313204553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1313204552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f58b437eba075247bc1b8a721891343, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Hobby.Erez.Asteroids2D.AudioController
+  backgroundMusic: {fileID: 8300000, guid: b1eda11fe96b9334597426143a7e0aa0, type: 3}
+  victorySound: {fileID: 8300000, guid: 0dddefacebaa83a4187c780b656108b4, type: 3}
+  asteroidSplitFX: {fileID: 8300000, guid: 04fbc1aee0629ff44ae7087f12967cc5, type: 3}
+  asteroidBumpFX: {fileID: 8300000, guid: 21d73725c2ba0804f97ad566a46cbd13, type: 3}
+  shipCrushFX: {fileID: 8300000, guid: ff3b2d467434c2440ad012b03f864bcc, type: 3}
+--- !u!4 &1313204554
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1313204552}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1901203505
 GameObject:
   m_ObjectHideFlags: 0
@@ -392,4 +392,4 @@ SceneRoots:
   m_Roots:
   - {fileID: 1901203508}
   - {fileID: 1307056821}
-  - {fileID: 1056940819}
+  - {fileID: 1313204554}

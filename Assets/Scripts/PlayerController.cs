@@ -10,6 +10,8 @@ namespace Hobby.Erez.Asteroids2D{
         [SerializeField] private float thrustForce = 50.0f;
         [SerializeField] private float maxSpeed = 0.200f;
         [SerializeField] private AudioClip thrustAudio;
+
+        private Vector2 heading = Vector2.up;
         
         
         public event Action OnPlayerHit;
@@ -39,23 +41,25 @@ namespace Hobby.Erez.Asteroids2D{
             
         }
 
-       void InitLazerParams(){
-            /*ParticleSystem.EmitParams lazerParams = new ParticleSystem.EmitParams{
-                position = spawnOrigin,
-                velocity = fireDirection * laserSpeed,
-                startLifetime = laserLifetime,
-                startSize3D = new Vector3(laserSize.x, laserSize.y, 1f),
-                startColor = laserColor,
-                applyShapeToPosition = false
-            };*/
-        }
         private void FixedUpdate(){
             if (Mouse.current != null && Mouse.current.leftButton.isPressed){
                 MovePlayer();
             }
         }
 
+        
         private void MovePlayer(){
+            if (Camera.main == null || Mouse.current == null) return;
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.value);
+            
+            if(Borders.Instance.IsOutsideBorders(new Vector2(mousePos.x, mousePos.y))){return;}
+            
+            Vector2 direction = (mousePos - transform.position).normalized;
+            transform.up = direction;
+            playerRigidbody.AddForce(direction * thrustForce);
+            
+        }
+        private void OnMovePlayer(InputValue value){
             if (Camera.main == null || Mouse.current == null) return;
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.value);
             Vector2 direction = (mousePos - transform.position).normalized;
@@ -78,28 +82,7 @@ namespace Hobby.Erez.Asteroids2D{
                 weaponSystem.Stop();
             }
         }
-
-        /*public void FireLaserBurst(){
-            if (weaponsArray == null) return;
-
-            Vector3 spawnOrigin = transform.position + transform.up * noseOffset;
-
-            Vector3 fireDirection = transform.up;
-            //float angle = (i - (kLaserCount - 1) / 2.0f) * spreadAngle;
-            fireDirection =  transform.up;
-    
-            var emitParams = new ParticleSystem.EmitParams{
-                position = spawnOrigin,
-                velocity = fireDirection * laserSpeed,
-                startLifetime = laserLifetime,
-                startSize3D = new Vector3(laserSize.x, laserSize.y, 1f),
-                startColor = laserColor,
-                applyShapeToPosition = false
-            };
-
-            weaponSystem.Emit(emitParams, 1);
-        }*/
-        
+ 
         #if HANDLE_PLAYER_COLLIDE_ASTEROID
         private void OnCollisionEnter2D(Collision2D collision){
             if (collision.gameObject.CompareTag(Tags.Asteroid)){

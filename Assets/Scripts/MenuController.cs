@@ -44,15 +44,15 @@ public class MenuController : MonoBehaviour{
     }
 
     private void OnNewGameClicked(ClickEvent evt){
-        SceneManager.LoadScene(gameSceneName);
+        SceneManager.LoadSceneAsync(gameSceneName, LoadSceneMode.Single);
     }
 
     private void OnHighScoreClicked(ClickEvent evt){
-        SceneManager.LoadScene(highScoreSceneName);
+        SceneManager.LoadSceneAsync(highScoreSceneName, LoadSceneMode.Additive);
     }
 
     private void OnSettingsClicked(ClickEvent evt){
-        SceneManager.LoadScene(settingsSceneName);
+        SceneManager.LoadSceneAsync(settingsSceneName, LoadSceneMode.Additive);
     }
 
     private void OnQuitClicked(ClickEvent evt){

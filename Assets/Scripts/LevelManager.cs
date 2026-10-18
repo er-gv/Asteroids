@@ -29,13 +29,27 @@ public class LevelManager : MonoBehaviour{
     [SerializeField] private Borders borders;
     [Header("Score")]
     [SerializeField] ScoreManager scoreManager;
-    [Header("UI")]
-    [SerializeField] private GameObject gameOverPane;
-    [SerializeField] private GameObject pauseBtn;
-    [SerializeField] private UIDocument gamePanelUIDocument;
 
+    [Header("UI")]
+    [SerializeField] private Canvas levelWideCanvas;
+    [SerializeField] private GameObject gameOverPane;
+    [SerializeField] private GameObject gamePausedPane;
+    [SerializeField] private UnityEngine.UI.Button settingsBtn;
+    [SerializeField] private UnityEngine.UI.Button quitGameBtn;
+    [SerializeField] private UnityEngine.UI.Button pausePlayBtn;
+    [SerializeField] private Material pauseTintMaterial;
+    private UnityEngine.UI.Image pauseTintOverlay;
+    [SerializeField] private Sprite pauseSelectedSprite;
+    [SerializeField] private Sprite playSelectedSprite;
+    [SerializeField] private Sprite pausePressedSprite;
+    [SerializeField] private Sprite playPressedSprite;
+    [SerializeField] private Sprite pauseDisabledSprite;
+    [SerializeField] private Sprite playDisabledSprite;
+    [SerializeField] private Sprite playHighlightedSprite;
+    [SerializeField] private Sprite pauseHighlightedSprite;
     
-    
+    private UnityEngine.UI.Image pauseImage;
+    private bool isPaused = false;
 
     //public event Action<Asteroid> OnAsteroidHit;
     
@@ -43,32 +57,66 @@ public class LevelManager : MonoBehaviour{
 
     private void Awake() {
         Debug.Log($"[Level Awake] Level contains {asteroids.Count} asteroids:");
-        gameOverPane.SetActive(false);
+        //gameOverPane.SetActive(false);
         InitAsteroids();
         ship.OnPlayerHit += OnLevelFailed;
+        
+    }
+
+    private void OnEnable() {
         InitUI();
+        ResumeGame();
+    }
+
+    private void OnDisable() {
+        ship.OnPlayerHit -= OnLevelFailed;
+        quitGameBtn.onClick.RemoveAllListeners();
+        settingsBtn.onClick.RemoveAllListeners();
     }
 
     private void InitUI(){
+        gameOverPane.SetActive(false);
+        gamePausedPane.SetActive(false);
+        InitPauseTintOverlay();
+        settingsBtn.onClick.AddListener(()=>{SceneManager.LoadScene("Settings", LoadSceneMode.Additive);});
+    }
+
+    private void InitPauseTintOverlay(){
+        if (pauseTintOverlay != null){
+            pauseTintOverlay.gameObject.SetActive(false);
+            return;
+        }
+
         
-        gamePanelUIDocument.rootVisualElement.Q<Button>("SettingsBtn").clicked += 
-        () => {
-            SceneManager.LoadSceneAsync("Settings", LoadSceneMode.Additive);    
-        };
-        gamePanelUIDocument.rootVisualElement.Q<Button>("ExitBtn").clicked += 
-        () => {
-            SceneManager.UnloadSceneAsync("Level");
-            SceneManager.LoadSceneAsync("MainMenu", LoadSceneMode.Single);
-        };
-        gamePanelUIDocument.rootVisualElement.Q<Toggle>("PausePlayToggle")
-        .RegisterValueChangedCallback(evt => {    
-            if (true == evt.newValue){
-                PauseGame();
-            }
-            else{
-                ResumeGame();
-            }
-        });
+        if (levelWideCanvas == null){
+            Debug.LogError("[LevelManager] Pause button must be under a Canvas to show the pause tint.");
+            return;
+        }
+
+        GameObject overlayObject = new GameObject("PauseTintOverlay", typeof(RectTransform), typeof(CanvasRenderer), typeof(UnityEngine.UI.Image));
+        overlayObject.layer = levelWideCanvas.gameObject.layer;
+        RectTransform overlayRect = overlayObject.GetComponent<RectTransform>();
+        overlayRect.SetParent(levelWideCanvas.transform, false);
+        overlayRect.anchorMin = Vector2.zero;
+        overlayRect.anchorMax = Vector2.one;
+        overlayRect.offsetMin = Vector2.zero;
+        overlayRect.offsetMax = Vector2.zero;
+        overlayRect.SetAsFirstSibling();
+
+        pauseTintOverlay = overlayObject.GetComponent<UnityEngine.UI.Image>();
+        pauseTintOverlay.material = pauseTintMaterial;
+        pauseTintOverlay.color = new Color(0.8805f, 0.7886f, 0.6008f, 0.3f);
+        pauseTintOverlay.raycastTarget = false;
+        pauseTintOverlay.gameObject.SetActive(false);
+    }
+
+    public void OnPauseStateChanged() {
+        if (isPaused) {
+            ResumeGame();
+        } 
+        else {
+            PauseGame();
+        }
     }
     
     private void InitAsteroids() {
@@ -81,31 +129,51 @@ public class LevelManager : MonoBehaviour{
     }
 
 
-        // ----- Pause / Resume / Quit / Restart -----
+    // ----- Pause / Resume / Quit / Restart -----
     
     
-
     public void PauseGame(){
-        Debug.Log("[LevelManager] PauseGame called.");
+        Debug.Log("[toggle] PauseGame called.");
+        isPaused = true;
+        gamePausedPane.SetActive(true);
+        if (pauseTintOverlay != null) pauseTintOverlay.gameObject.SetActive(true);
         Time.timeScale = 0f;
         AudioController.Instance.MuteMusic();
+        UpdatePauseSprite();
+        SetAsteroidAlpha(0.25f);
 
     }
 
     public void ResumeGame(){
-        Debug.Log("[LevelManager] ResumeGame called.");
+        Debug.Log("[toggle] ResumeGame called.");
+        isPaused = false;
+        gamePausedPane.SetActive(false);
+        if (pauseTintOverlay != null) pauseTintOverlay.gameObject.SetActive(false);
         Time.timeScale = 1f;
         AudioController.Instance.UnmuteMusic();
+        UpdatePauseSprite();
+        SetAsteroidAlpha(1f);
+    }    
+
+    private void SetAsteroidAlpha(float alpha){
+        foreach (Asteroid asteroid in asteroids){
+            SpriteRenderer spriteRenderer = asteroid.GetComponent<SpriteRenderer>();
+            Color color = spriteRenderer.color;
+            color.a = alpha;
+            spriteRenderer.color = color;
+        }
     }
 
-    public void QuitGame()
-    {
-        Time.timeScale = 1f; // don't leave the app in a paused state on exit
-        // No score save call here — quitting intentionally discards progress.
-        Application.Quit();
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#endif
+    private void UpdatePauseSprite() {
+        
+            UnityEngine.UI.SpriteState spriteState = new();
+            
+            Debug.Log($"[toggle] state is {isPaused}");
+            spriteState.highlightedSprite = isPaused ? playHighlightedSprite : pauseHighlightedSprite; 
+            spriteState.pressedSprite = isPaused ? playPressedSprite : pausePressedSprite;
+            spriteState.selectedSprite = isPaused ? playSelectedSprite : pauseSelectedSprite;
+            spriteState.disabledSprite = isPaused ? playDisabledSprite : pauseDisabledSprite;
+            pausePlayBtn.spriteState = spriteState;
     }
 
     public void RestartGame(){
@@ -114,7 +182,16 @@ public class LevelManager : MonoBehaviour{
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    
+    public void OnQuitToMenu(){
+        Debug.Log("[LevelManager] QuitGame called.");
+        SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().name);
+        SceneManager.LoadSceneAsync("MainMenu", LoadSceneMode.Single);
+    }
+
+    public void OnSettingsBtnClicked(){
+        Debug.Log("[LevelManager] Settings button clicked.");
+        SceneManager.LoadScene("Settings", LoadSceneMode.Additive);
+    }
     private void RemoveAsteroid(Asteroid a) {
         asteroids.Remove(a);
         Destroy(a.gameObject);
@@ -166,26 +243,29 @@ public class LevelManager : MonoBehaviour{
 
     public void OnLevelFailed(){
         ship.enabled = false; // disables ship movement/input handling
+        pausePlayBtn.interactable = false;
+        settingsBtn.interactable = false;
+        quitGameBtn.interactable = false;
         //AudioController.Instance.PlayGameOverSound();
         Debug.Log("[LevelManager] Level Failed. Game over.");
         ExplodeShip();
-                
-        gameOverPane.SetActive(true);
-        Transform caption = gameOverPane.transform.Find("Caption");
-        TMP_Text gameOverText = caption != null ? caption.GetComponent<TMP_Text>() : null;
+                       
+        //gameOverPane.SetActive(true);
+        //Transform caption = gameOverPane.transform.Find("Caption");
+        /*TMP_Text gameOverText = caption != null ? caption.GetComponent<TMP_Text>() : null;
         if (gameOverText != null){
             gameOverText.text = "Game Over!\nFinal score: " + scoreManager.Score.ToString();
         }
         else{
             Debug.LogError("[LevelManager] No TextMeshPro component found on gameOverPane/Caption.");
-        }
+        }*/
     }
 
     private void HandleLevelWon(){
         Debug.Log("[LevelManager] Level Won! All asteroids destroyed.");
         ship.enabled = false; // disables ship movement/input handling
         AudioController.Instance.PlayVictorySound();
-        gameOverPane.SetActive(true);
+        //gameOverPane.SetActive(true);
     }
 
     

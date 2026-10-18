@@ -6,12 +6,17 @@ This was created with the help of Assistant, a Unity Artificial Intelligence pro
 .astro-toggle-button {
     width: 44px;
     height: 44px;
-    margin: 0;
+    margin-left: 20px; 
     padding: 0;
     background-color: transparent;
     border-width: 0;
     cursor: link;
     transition-duration: 0.15s;
+    align-content: center; 
+    align-self: center; 
+    justify-content: space-around; 
+    flex-direction: row; 
+    -unity-text-align: middle-left;
 }
 
 .astro-toggle:hover,
@@ -41,7 +46,7 @@ This was created with the help of Assistant, a Unity Artificial Intelligence pro
     background-color: transparent;
     border-width: 0;
     -unity-background-scale-mode: scale-to-fit;
-    background-image: url("project://database/Assets/UI/Sprites/Pause5.png");
+    background-image: url("project://database/Assets/UI/Sprites/Play5.png");
 }
 
 /* Default / Music checked state background image */
@@ -51,12 +56,12 @@ This was created with the help of Assistant, a Unity Artificial Intelligence pro
 .astro-toggle-button .unity-toggle__input:checked,
 #music-toggle:checked .unity-toggle__input,
 #music-toggle .unity-toggle__input:checked {
-    background-image: url("project://database/Assets/UI/Sprites/Play5.png");
+    background-image: url("project://database/Assets/UI/Sprites/EnableMusic3.png");
 }
 
 /* Music toggle unchecked */
 #music-toggle .unity-toggle__input {
-    background-image: url("project://database/Assets/UI/Sprites/MuteMusic3.png");
+    background-image: url("project://database/Assets/UI/Sprites/MuteMusic2.png");
 }
 
 /* music  toggle checked */
@@ -67,7 +72,7 @@ This was created with the help of Assistant, a Unity Artificial Intelligence pro
 
 /* SFX / Effects toggle unchecked */
 #sfx-toggle .unity-toggle__input {
-    background-image: url("project://database/Assets/UI/Sprites/MuteEffects3.png");
+    background-image: url("project://database/Assets/UI/Sprites/MuteEffects2.png");
 }
 
 /* SFX / Effects toggle checked */

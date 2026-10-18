@@ -10,14 +10,14 @@
     <engine:VisualElement name="root" class="root">
     
 
-        <engine:Label name="title-label" text="ASTEROIDS" class="title" />
+        <engine:Label name="main-menu-title" class="title" text="ASTEROIDS"  />
 
         <engine:VisualElement name="menu-panel" class="menu-panel">
 
-            <engine:Label name="new-game-label" text="NEW GAME" class="menu-item menu-item-color" />
-            <engine:Label name="high-score-label" text="HIGH SCORE" class="menu-item menu-item-color" />
-            <engine:Label name="settings-label" text="SETTINGS" class="menu-item menu-item-color" />
-            <engine:Label name="quit-label" text="QUIT" class="menu-item menu-item-color" />
+            <engine:Label name="new-game-label" text="NEW GAME" class="main-menu-item" />
+            <engine:Label name="high-score-label" text="HIGH SCORE" class="main-menu-item" />
+            <engine:Label name="settings-label" text="SETTINGS" class="main-menu-item" />
+            <engine:Label name="quit-label" text="QUIT" class="main-menu-item" />
 
         </engine:VisualElement>
 

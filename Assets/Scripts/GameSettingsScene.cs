@@ -16,7 +16,7 @@ public class GameSettingsController : MonoBehaviour{
     private Slider sfxVolumeSlider;
     private Toggle sfxToggle;
     private Toggle musicToggle;
-    private Button backBtn;
+    private Label backBtn;
 
     private void OnEnable(){
         uiDocument = GetComponent<UIDocument>();
@@ -29,35 +29,52 @@ public class GameSettingsController : MonoBehaviour{
         
         sfxToggle = root.Q<Toggle>("sfx-toggle");
         musicToggle = root.Q<Toggle>("music-toggle");
-        backBtn = root.Q<Button>("back-button");
-        
+        backBtn = root.Q<Label>("back-button");
+               
+
         backBtn?.RegisterCallback<ClickEvent>(OnBackButtonClicked);
-        musicToggle.RegisterValueChangedCallback(OnMusicToggleChanged);
-        sfxToggle.RegisterValueChangedCallback(OnSfxToggleChanged);
-        musicVolumeSlider.RegisterValueChangedCallback(OnSetMusicVolume);
-        sfxVolumeSlider.RegisterValueChangedCallback(OnSetSFXVolume);
+        musicToggle?.RegisterValueChangedCallback(OnMusicToggleChanged);
+        sfxToggle?.RegisterValueChangedCallback(OnSfxToggleChanged);
+        musicVolumeSlider?.RegisterValueChangedCallback(OnSetMusicVolume);
+        sfxVolumeSlider?.RegisterValueChangedCallback(OnSetSFXVolume);
+
+    }
+
+    private void Start(){
+        Debug.Log($"[GameSettingsController] Start: uiDocument={uiDocument}");
+        Debug.Log($"[Settings] OnEnable: Initializing sliders and toggles with current audio settings.");
+        musicVolumeSlider.SetValueWithoutNotify(AudioController.Instance.MusicVolume);
+        musicVolumeSlider.SetValueWithoutNotify(AudioController.Instance.SFXVolume);
+        musicToggle.SetValueWithoutNotify(AudioController.Instance.IsMusicMuted);
+        sfxToggle.SetValueWithoutNotify(AudioController.Instance.IsSFXMuted);
+        Debug.Log($"[Settings] After setting sliders and toggles to AudioController values:");
+        Debug.Log($"[Settings] music vol: {musicVolumeSlider.value}");
+        Debug.Log($"[Settings] music enabled:{ musicToggle.value}");
     }
 
     private void OnDisable(){
         backBtn?.UnregisterCallback<ClickEvent>(OnBackButtonClicked);
         musicVolumeSlider?.UnregisterValueChangedCallback(OnSetMusicVolume);
         sfxVolumeSlider?.UnregisterValueChangedCallback(OnSetSFXVolume);
-        sfxToggle.UnregisterValueChangedCallback(OnSfxToggleChanged);
-        musicToggle.UnregisterValueChangedCallback(OnMusicToggleChanged);
+        sfxToggle?.UnregisterValueChangedCallback(OnSfxToggleChanged);
+        musicToggle?.UnregisterValueChangedCallback(OnMusicToggleChanged);
     }
     
     
 
    private void OnSetMusicVolume(ChangeEvent<float> evt){
-        AudioController.Instance.SetMusicVolume(evt.newValue);
+        Debug.Log($"[Settings] OnSetMusicVolume: New value={evt.newValue}");
+        AudioController.Instance.SetMusicVolume(Mathf.Clamp01(evt.newValue));
     }
 
     private void OnSetSFXVolume(ChangeEvent<float> evt){
-        AudioController.Instance.SetSFXVolume(evt.newValue);
+        Debug.Log($"[Settings] OnSetSFXVolume: New value={evt.newValue}");
+        AudioController.Instance.SetSFXVolume(Mathf.Clamp01(evt.newValue));
+        AudioController.Instance.PlayAsteroidBumpFX();
     }
 
     private void OnMusicToggleChanged(ChangeEvent<bool> evt){
-        if(evt.newValue){AudioController.Instance.MuteMusic();}
+        if(false==evt.newValue){AudioController.Instance.MuteMusic();}
         else{AudioController.Instance.UnmuteMusic();}
     }   
     
@@ -66,6 +83,8 @@ public class GameSettingsController : MonoBehaviour{
         else { AudioController.Instance.UnmuteSFX();}
     }
 
-    private void OnBackButtonClicked(ClickEvent evt) => SceneManager.UnloadSceneAsync("Settings");
+    private void OnBackButtonClicked(ClickEvent evt) {
+        SceneManager.UnloadSceneAsync("Settings");
+    }
      
 }}
