@@ -28,7 +28,6 @@ public class ScoreManager : MonoBehaviour{
             Destroy(gameObject);
             return;
         }
-
         Instance = this;
         DontDestroyOnLoad(gameObject);
         OnScoreChanged += UpdateScoreDisplay;

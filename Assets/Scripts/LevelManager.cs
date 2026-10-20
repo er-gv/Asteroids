@@ -129,7 +129,7 @@ public class LevelManager : MonoBehaviour{
     }
 
 
-    // ----- Pause / Resume / Quit / Restart -----
+    // ----- Pause / Resume / Quit / Restart / Go to High score -----
     
     
     public void PauseGame(){
@@ -188,6 +188,11 @@ public class LevelManager : MonoBehaviour{
         SceneManager.LoadSceneAsync("MainMenu", LoadSceneMode.Single);
     }
 
+    public void OnLoadHighScore() {
+        
+        SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().name);
+        SceneManager.LoadSceneAsync("HighScore", LoadSceneMode.Single);
+    }
     public void OnSettingsBtnClicked(){
         Debug.Log("[LevelManager] Settings button clicked.");
         SceneManager.LoadScene("Settings", LoadSceneMode.Additive);

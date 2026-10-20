@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
-
+using System.Linq;
 namespace Hobby.Erez.Asteroids2D
 {
     /// <summary>
@@ -54,6 +54,13 @@ namespace Hobby.Erez.Asteroids2D
             backButton.UnregisterCallback<ClickEvent>(OnBackClicked);
         }
     
+        public bool IsEmptyHighScore() {
+            return records.Count > 0;
+        }
+
+        public int GetTopScore() {
+            return records.Count == 0 ? 0 : records.Max(record => record.score);
+        }
         public string GetPlayerName(){
             return playerName;
         }
